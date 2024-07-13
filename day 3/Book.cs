@@ -4,14 +4,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 
 namespace iTi
 {
     class Book1
     {
         int id, price;
-        string name, category;
+        string name, category; 
         DateTime created_on; 
         bool isdeleted;
         public  static int Count = 0;
