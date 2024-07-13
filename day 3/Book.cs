@@ -11,7 +11,7 @@ namespace iTi
     class Book1
     {
         int id, price;
-        string name, category;
+        string name, category; 
         DateTime created_on; 
         bool isdeleted;
         public  static int Count = 0;
