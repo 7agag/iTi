@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 //<<<<<<< HEAD:Task 1 C#/Task1.cs
     //class Student1()
     //{
-    //    //name - SSN -Age - phone 
+    //    //name - SSN -Age - phone  
     //    string name;
     //    int SSN;
     //    int Age;
