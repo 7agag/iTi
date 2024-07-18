@@ -17,7 +17,7 @@
 //        //    string[] name = new string[x];
 //        //    int[] age = new int[x];
 
-//        //    for (int i = 0; i <= x - 1; i++)
+//        //    for (int i = 0; i <= x - 1; i++) 
 //        //    {
 //        //        Console.Write("Add name :");
 //        //        string s = Console.ReadLine();
