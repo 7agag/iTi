@@ -26,7 +26,7 @@ namespace iTi.day7
 
 
         public T PerformAddition(T a, T b) => Add(a, b);
-        public T PerformSubtraction(T a, T b) => Subtract(a, b);
+        public T PerformSubtraction(T a, T b) => Subtract(a, b); 
         public T PerformMultiplication(T a, T b) => Multiply(a, b);
         public T PerformDivision(T a, T b) => Divide(a, b);
 
