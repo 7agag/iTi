@@ -12,7 +12,7 @@
 //        //{
 
 //        //    H1 h = new H1("hi", "red");
-//        //    H2 hh = new H2("Hello Mohamed", "blue");
+//        //    H2 hh = new H2("Hello Mohamed", "blue"); 
 //        //    ImageElement img = new ImageElement("C/img/21");
 
 
