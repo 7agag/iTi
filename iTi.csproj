@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="day2\" />
+    <Folder Include="C#\day2\" />
   </ItemGroup>
  
 </Project>
