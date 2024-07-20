@@ -1,0 +1,976 @@
+           //------------------Projection---------------//
+           #region Select
+           //----Select----//
+           //List<Employee> employees = new List<Employee>
+           //{
+           //    new Employee {ID = 101, FirstName = "Ali", LastName = "Maher", Salary = 60000 },
+           //    new Employee {ID = 102, FirstName = "Ramy", LastName = "Emam", Salary = 70000 },
+           //    new Employee {ID = 103, FirstName = "Zain", LastName = "Samy", Salary = 80000 },
+           //    new Employee {ID = 104, FirstName = "Kareem", LastName = "Mohamed", Salary = 90000 },
+           //    new Employee {ID = 105, FirstName = "Maged", LastName = "Ahmed", Salary = 100000 },
+           //    new Employee {ID = 106, FirstName = "Zyad", LastName = "Wael", Salary = 160000 }
+           //};
+           //var result1 = employees.Select(x => x.ID);
+           //var result2 = employees.Select(x => new { Name = x.FirstName + " " + x.LastName, NetSalary = x.Salary });
+           //var result3 = employees.Select(x => new EmployeeDto { ID = x.ID, FullName = x.FirstName + " " + x.LastName });
+           //var result4 = employees.Select((emp, index) => new { IDX = index, Name = emp.FirstName + " " + emp.LastName });
+           //foreach (var item in result4)
+           //{
+           //    Console.WriteLine(item);
+           //}
+           #endregion
+
+           #region SelectMany
+           //----SelectMany----//
+           //var students = new List<Student>()
+           //{
+           //    new Student(){ID = 1, Name = "Ramy", Email = "Ramy@gmail.com", Programming = new List<string>() { "C#", "Jave", "C++"} },
+           //    new Student(){ID = 2, Name = "Kareem", Email = "Kareem@gmail.com", Programming = new List<string>() { "WCF", "SQL Server", "C#" }},
+           //    new Student(){ID = 3, Name = "Tamer", Email = "Tamer@gmail.com", Programming = new List<string>() { "MVC", "Jave", "LINQ"} },
+           //    new Student(){ID = 4, Name = "Sara", Email = "Sara@gmail.com", Programming = new List<string>() { "ADO.NET", "C#", "LINQ" } }
+           //};
+           //var result1 = students.SelectMany(x => x.Programming);
+           //var result2 = students.SelectMany((std, mainIDX) => std.Programming.Select(x => new { IDX = mainIDX, prog = x }));
+           //var result3 = students.SelectMany(std => std.Programming, (s, prog) => new { name = s.Name, progLanguage = prog });
+           //var result4 = students.Select((std, mainIDX) => new { IDX = mainIDX, student = std })
+           //    .SelectMany(x => x.student.Programming, (s, prog) => new { Indx = s.IDX, name = s.student.Name, progLanguage = prog });
+           //foreach (var programmingLanguage in result4)
+           //{
+           //    Console.WriteLine(programmingLanguage);
+           //}
+           #endregion
+
+           //------------------Filtering----------------//
+           #region Where
+           //-----Where-----//
+           //var products = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Product1", Price = 30 },
+           //    new Product { Id = 2, Name = "Product2", Price = 60 },
+           //    new Product { Id = 3, Name = "Product3", Price = 80 },
+           //    new Product { Id = 4, Name = "Product4", Price = 100 },
+           //    new Product { Id = 5, Name = "Product5", Price = 120 },
+           //    new Product { Id = 6, Name = "Product6", Price = 160 },
+           //};
+           //var result1 = products.Where(product => product.Id > 3 && product.Price > 120);
+           //var result2 = products.Where((prod, IDX)=>prod.Price>60 && IDX % 2 == 0); // index start with zero
+           //Func<Product, bool> predicate = prod => prod.Price > 100;
+           //var result3 = products.Where(predicate);
+           //var filters = new List<Func<Product, bool>>
+           //{
+           //    prod => prod.Price >= 100 ,
+           //    prod => prod.Id % 2 == 0
+           //};
+           //List<Product> result4 = new();
+           //foreach(var filter in filters)
+           //{
+           //    products = products.Where(filter).ToList();
+           //};
+           //foreach (var item in products)
+           //{
+           //    Console.WriteLine(item.Name);
+           //}
+           #endregion
+
+           #region ofType
+           //----ofType----//
+           //var personList = new List<IPerson>()
+           //{
+           //    new Developer { Identity = Guid.NewGuid(), Name = "Ali", Skills = new List<string> { "C#", "ASP.NET" } },
+           //    new Developer { Identity = Guid.NewGuid(), Name = "Ramy", Skills = new List<string> { "JavaScript", "React" } },
+           //    new Developer { Identity = Guid.NewGuid(), Name = "Hoda", Skills = new List<string> { "Python", "Django" } },
+           //    new Engineer { Identity = Guid.NewGuid(), Name = "Samy", ExperianceYears = 5 },
+           //    new Engineer { Identity = Guid.NewGuid(), Name = "Hady", ExperianceYears = 3 },
+           //    new Engineer { Identity = Guid.NewGuid(), Name = "Samir", ExperianceYears = 7 }
+           //};
+           //var result1 = personList.OfType<IPerson>().ToList();
+           //var result2 = personList.OfType<IPerson>().Where(x => x is IExperiance).ToList();
+           //foreach (var person in result2)
+           //{
+           //    Console.WriteLine(person.Name);
+           //}
+           #endregion
+
+           //------------------Set----------------------//
+           #region Distinct
+           ////-----Distinct------//
+           ////[Note Override equality and get hash code should be for same properties => issue memory , dupliaction]
+           //var fruits = new List<string> { "Apple", "Banana", "Cherry", "Date", "Elderberry", "Mango", "Pineapple", "APPle", "Cherry" };
+           //var result1 = fruits.Distinct();
+           //var result2 = fruits.Distinct(StringComparer.OrdinalIgnoreCase);
+           //var fruitList = new List<Fruit>()
+           //{
+           //    new Fruit(){Id = 1, Name = "Apple",Price=20},
+           //    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           //    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           //    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           //};
+           #region complex object
+           //// implement comparer IEquilityComparer
+           //var comparer = new FruitComparer();
+           //var result3 = fruitList.Distinct(comparer);
+
+           //// Override equility
+           //var personList = new List<Person>
+           //{
+           //    new Person { Id = 1, Name = "Ali" },
+           //    new Person { Id = 1, Name = "Ramy" },
+           //    new Person { Id = 3, Name = "Samy" },
+           //    new Person { Id = 2, Name = "Nabil" }
+           //};
+           //var result4 = personList.Distinct();
+
+           //// use aonymous object
+           //var personList1 = new List<Person>
+           //{
+           //    new Person { Id = 1, Name = "Ali" },
+           //    new Person { Id = 1, Name = "Ramy" },
+           //    new Person { Id = 3, Name = "Samy" },
+           //    new Person { Id = 1, Name = "Ali" }
+           //};
+           //var result5 = personList1.Select(x => new {Id = x.Id , Name = x.Name}).Distinct().ToList();
+           //// implement equatable
+           //var result6 = CollageStudent.GetStudents()
+           //                    .Distinct().ToList();
+           #endregion
+           //foreach (var item in result6)
+           //{
+           //    Console.WriteLine(item.Name);
+           //}
+           #endregion
+
+           #region Except
+           //List<int> dataSource1 = new List<int>() { 1, 2, 3, 4, 5, 6 };
+           //List<int> dataSource2 = new List<int>() { 1, 3, 5, 8, 9, 10 }; // can be null and in this case throw exception use ??
+           //var result1 = dataSource1.Except(dataSource2);
+           ////foreach (var item in result1)
+           ////{
+           ////    Console.WriteLine(item);
+           ////}
+           //List<Product> productList1 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 2, Name = "Phone", Price = 800 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 4, Name = "Headphones", Price = 150 }
+           //};
+
+           //// Create the second list of products
+           //List<Product> productList2 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 }, 
+           //    new Product { Id = 5, Name = "Keyboard", Price = 50 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 6, Name = "Mouse", Price = 30 }
+           //};
+           //// iequalitycomparer
+           //ProductComparer productComparer = new ProductComparer();
+           //var result2 = productList1.Except(productList2, productComparer);
+
+           //// anonymous object
+           //var result3 = productList1.Select(x=>new { Id = x.Id, Name = x.Name}).Except(productList2.Select(x => new { Id = x.Id, Name = x.Name }));
+           //// override equal and gethashcode
+           //var result4 = productList1.Except(productList2);
+           //// implement iequatable
+           //var result5 = productList1.Except(productList2);
+           //foreach (var item in result5)
+           //{
+           //    Console.WriteLine(item.Name);
+           //}
+           #endregion
+
+           #region Intersect
+           //List<int> dataSource1 = new List<int>() { 1, 2, 3, 4, 5, 6 };
+           //List<int> dataSource2 = new List<int>() { 1, 3, 5, 8, 9, 10 }; // can be null and in this case throw exception use ??
+           //var result1 = dataSource1.Intersect(dataSource2);
+           ////foreach (var item in result1)
+           ////{
+           ////    Console.WriteLine(item);
+           ////}
+           //List<Product> productList1 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 2, Name = "Phone", Price = 800 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 4, Name = "Headphones", Price = 150 }
+           //};
+
+           //// Create the second list of products
+           //List<Product> productList2 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 5, Name = "Keyboard", Price = 50 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 6, Name = "Mouse", Price = 30 }
+           //};
+           //// iequalitycomparer
+           //ProductComparer productComparer = new ProductComparer();
+           //var result2 = productList1.Intersect(productList2, productComparer);
+
+           //// anonymous object
+           //var result3 = productList1.Select(x => new { Id = x.Id, Name = x.Name }).Intersect(productList2.Select(x => new { Id = x.Id, Name = x.Name }));
+           //// override equal and gethashcode
+           //var result4 = productList1.Intersect(productList2);
+           //// implement iequatable
+           //var result5 = productList1.Intersect(productList2);
+           //foreach (var item in result5)
+           //{
+           //    Console.WriteLine(item.Name);
+           //}
+           #endregion
+
+           #region Union
+           //////[Note => This means it combines the elements from both sequences into a new sequence while removing duplicate elements]
+           //List<int> dataSource1 = new List<int>() { 1, 2, 3, 4, 5, 6 };
+           //List<int> dataSource2 = new List<int>() { 1, 3, 5, 8, 9, 10 }; // can be null and in this case throw exception use ??
+           //var result1 = dataSource1.Union(dataSource2);
+           ////foreach (var item in result1)
+           ////{
+           ////    Console.WriteLine(item);
+           ////}
+           //List<Product> productList1 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 2, Name = "Phone", Price = 800 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 4, Name = "Headphones", Price = 150 }
+           //};
+
+           //// Create the second list of products
+           //List<Product> productList2 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 5, Name = "Keyboard", Price = 50 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 6, Name = "Mouse", Price = 30 }
+           //};
+           //// iequalitycomparer
+           //ProductComparer productComparer = new ProductComparer();
+           //var result2 = productList1.Union(productList2, productComparer);
+
+           //// anonymous object
+           //var result3 = productList1.Select(x => new { Id = x.Id, Name = x.Name }).Union(productList2.Select(x => new { Id = x.Id, Name = x.Name }));
+           //// override equal and gethashcode
+           //var result4 = productList1.Union(productList2);
+           //// implement iequatable
+           //var result5 = productList1.Union(productList2);
+           //foreach (var item in result5)
+           //{
+           //    Console.WriteLine(item.Name);
+           //}
+           #endregion
+
+           #region Concat
+           //////[Note => That means it concatenates two of the same types of sequences or collections and returns a new sequence or collection without removing the duplicate elements.]
+           //List<Product> productList1 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 2, Name = "Phone", Price = 800 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 4, Name = "Headphones", Price = 150 }
+           //};
+
+           //// Create the second list of products
+           //List<Product> productList2 = new List<Product>
+           //{
+           //    new Product { Id = 1, Name = "Laptop", Price = 1200 },
+           //    new Product { Id = 5, Name = "Keyboard", Price = 50 },
+           //    new Product { Id = 3, Name = "Tablet", Price = 500 },
+           //    new Product { Id = 6, Name = "Mouse", Price = 30 }
+           //};
+           //var result1 = productList1.Concat(productList2);
+           //foreach(var item in result1)
+           //{
+           //    Console.WriteLine(item.Name);
+           //}
+           ////used in chaining .concat().concat()
+           ////concat list with array , concat data from different sources
+           #endregion
+
+           //------------------Ordering---------------//
+           #region OrderBy , OrderByDescending , ThenBy , ThenByDescending
+           //List<Employee> employees = new List<Employee>
+           //{
+           //    new Employee { ID = 1, FirstName = "Ali", LastName = "Hassan", Salary = 50000 },
+           //    new Employee { ID = 2, FirstName = "Ramy", LastName = "Mohammed", Salary = 60000 },
+           //    new Employee { ID = 3, FirstName = "Sara", LastName = "Ali", Salary = 57000 },
+           //    new Employee { ID = 4, FirstName = "Nour", LastName = "Khalid", Salary = 52000 },
+           //    new Employee { ID = 5, FirstName = "Omar", LastName = "Ahmed", Salary = 48000 },
+           //    new Employee { ID = 6, FirstName = "Layla", LastName = "Mahmoud", Salary = 51000 },
+           //    new Employee { ID = 7, FirstName = "Khaled", LastName = "Ibrahim", Salary = 53000 },
+           //    new Employee { ID = 8, FirstName = "Fatima", LastName = "Salem", Salary = 49000 },
+           //    new Employee { ID = 9, FirstName = "Ali", LastName = "Adel", Salary = 57000 },
+           //    new Employee { ID = 10, FirstName = "Leila", LastName = "Omar", Salary = 54000 }
+           //};
+           //var result1 = employees.OrderBy(x => x.FirstName).ThenBy(x => x.Salary);
+           //var result2 = employees.OrderByDescending(x => x.Salary).ThenByDescending(x => x.FirstName);
+
+           //////[Note => can use this four function with each other]
+           //var result3 = employees.OrderByDescending(x => x.Salary).OrderBy(x => x.LastName).ThenByDescending(x => x.Salary); //OrderBy override OrderByDescending
+           //var result4 = employees.OrderBy(x => x.LastName).ThenByDescending(x => x.Salary);
+           //foreach (var employee in result3)
+           //{
+           //    Console.WriteLine(employee.ToString());
+           //}
+           //Console.WriteLine("---------------------------------");
+           //foreach (var employee in result4)
+           //{
+           //    Console.WriteLine(employee.ToString());
+           //}
+           /*
+            1- can use comparer => implement IComparer and the compare method return int(positive , zero , negative) base the value of x 
+            before or after y or same to y and the ordering function choose which will apear first
+            for example return nagative in orderByAcesnding this lead to x will apear first
+            2- comparer can use with all ordering
+           */
+           //var result5 = employees.OrderBy(x => x, new EMPComparer());
+           //foreach (var employee in result5)
+           //{
+           //    Console.WriteLine(employee.ToString());
+           //}
+           #endregion
+
+           #region Reverse
+           ////[Note => work with any collection which implement IEnumrable , change performed on the list not produce new list]
+           //List<int> intList = new List<int>() { 1, 2, 3, 4, 9, 3, 6, 0, 5 };
+           //intList.Reverse(4, 5); 
+           //foreach(var item in intList)
+           //{
+           //    Console.WriteLine(item);
+           //}
+           #endregion
+
+           //------------------Aggregation---------------//
+           //[perform mathematical operations on sequences of numeric data and are also used to compute a single value from a sequence of values]
+           #region Sum
+           ////[Note => ignore null values , throw exception if the collection is null]
+           //List<int?> intList = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, null };
+           //var result1 = intList.Sum();
+           //var result2 = intList.Sum(x => x > 4 ? x : 0); // add condition on values
+           //var fruitList = new List<Fruit>()
+           //{
+           //    new Fruit(){Id = 1, Name = "RedApple",Price=20},
+           //    new Fruit(){Id = 1, Name = "GreenApple",Price=30},
+           //    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           //    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           //    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           //};
+           //var result3 = fruitList.Sum(x => x.Name.Contains("Apple") ? x.Price : 0);
+           //Console.WriteLine(result3);
+           #endregion
+
+           #region Max
+           //////[Note => ignore null values , throw exception if the collection is null]
+           ////List<int?> intList = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, null };
+           ////var result1 = intList.Max();
+           ////var result2 = intList.Max(x => x % 2 == 0 ? x : 0); // add condition on values
+           ////var fruitList = new List<Fruit>()
+           ////{
+           ////    new Fruit(){Id = 1, Name = "RedApple",Price=20},
+           ////    new Fruit(){Id = 1, Name = "GreenApple",Price=30},
+           ////    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           ////    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           ////    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           ////};
+           ////var result3 = fruitList.Max(x => x.Name.Contains("Apple") ? x.Price : 0);
+           ////var result4 = fruitList.Max(x => x.Price);
+           ////Console.WriteLine(result3);
+           #endregion
+
+           #region Min
+           ////[Note => ignore null values , throw exception if the collection is null]
+           //List<int?> intList = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, null };
+           //var result1 = intList.Min();
+           //var result2 = intList.Min(x => x % 2 == 0 ? x : null); // add condition on values
+           //var fruitList = new List<Fruit>()
+           //{
+           //    new Fruit(){Id = 1, Name = "RedApple",Price=20},
+           //    new Fruit(){Id = 1, Name = "GreenApple",Price=30},
+           //    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           //    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           //    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           //};
+           //var result3 = fruitList.Min(x => x.Name.Contains("Apple") ? x.Price : null);
+           //var result4 = fruitList.Min(x => x.Price);
+           //Console.WriteLine(result2);
+           #endregion
+
+           #region Avarage
+           ////[Note => ignore null values , throw exception if the collection is null , null value not count it in base , list of null the avarage will be null]
+           //List<int?> intList = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, null };
+           //var result1 = intList.Average();
+           //var result2 = intList.Average(x => x % 2 == 0 ? x : 0); // add condition on values
+           //var fruitList = new List<Fruit>()
+           //{
+           //    new Fruit(){Id = 1, Name = "RedApple",Price=20},
+           //    new Fruit(){Id = 1, Name = "GreenApple",Price=30},
+           //    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           //    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           //    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           //};
+           //var result3 = fruitList.Average(x => x.Name.Contains("Apple") ? x.Price : null);
+           //var result4 = fruitList.Average(x => x.Price);
+           //Console.WriteLine(result4);
+           #endregion
+
+           #region Count
+           ////[Note => doesn't null values]
+           //List<int?> intList = new List<int?>() { 1, 2, 3, 4, 5, 6, 7, 8, 9, null };
+           //var result1 = intList.Count();
+           //var result2 = intList.Count(x => x % 2 == 0 ? true : false);
+           //var fruitList = new List<Fruit>()
+           //{
+           //    new Fruit(){Id = 1, Name = "RedApple",Price=20},
+           //    new Fruit(){Id = 1, Name = "GreenApple",Price=30},
+           //    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           //    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           //    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           //};
+           //var result3 = fruitList.Count(x => x.Name.Contains("Apple"));
+           //var result4 = fruitList.Count();
+           //Console.WriteLine(result4);
+           #endregion
+
+           #region Aggregate
+           // structure (accomulated , nextValue) => accomulated (operation) nextValue
+
+           //List<int> intList = new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+           //var result1 = intList.Aggregate((x, y) => x * y);
+           //List<string> strList = new List<string>() { "a", "b", "c", "d" };
+           //var result2 = strList.Aggregate((x, y) => x + ',' + y);
+           //var result3 = strList.Aggregate("The result : ", (acc, nxtValue) => acc += nxtValue); // seed => intial value
+           //var result4 = strList.Aggregate("The result : ", (acc, nxtValue) => acc += nxtValue, acc => acc.Contains("a") ? acc.Replace("a", "Removed") : acc); // seed , operation on acc that resulted
+           //var fruitList = new List<Fruit>()
+           //{
+           //    new Fruit(){Id = 1, Name = "RedApple",Price=20},
+           //    new Fruit(){Id = 1, Name = "GreenApple",Price=30},
+           //    new Fruit(){Id = 2, Name = "Banana",Price=30},
+           //    new Fruit(){Id = 3, Name = "Mango",Price=40},
+           //    new Fruit(){Id = 4, Name = "Pineapple",Price=20},
+           //};
+           //var fruitStatistics = fruitList.Aggregate(new FruitStatistics(), (acc, nxtValue) =>
+           //{
+           //    if (acc.MinPrice > nxtValue.Price || acc.MinPrice == 0)
+           //    {
+           //        acc.MinPrice = nxtValue.Price;
+           //    }
+           //    if (acc.MaxPrice < nxtValue.Price)
+           //    {
+           //        acc.MaxPrice = nxtValue.Price;
+           //    }
+           //    acc.SumPrice += nxtValue.Price;
+           //    acc.FruitCount += 1;
+           //    return acc;
+           //});
+           //Console.WriteLine(fruitStatistics.ToString());
+           #endregion
+
+           //------------------Quantifiers---------------//
+           //[Check avilablity of items based on predicate]
+           #region All && Any && Contains[can use IEqualityComparer]
+           //List<PrimaryStudent> listStudents = new List<PrimaryStudent>()
+           //{
+           //    new PrimaryStudent{ID= 101,Name = "Ramy", TotalMarks = 265,
+           //        Subjects = new List<Subject>()
+           //        {
+           //            new Subject(){SubjectName = "Math", Marks = 80},
+           //            new Subject(){SubjectName = "Science", Marks = 90},
+           //            new Subject(){SubjectName = "English", Marks = 95}
+           //        }},
+           //    new PrimaryStudent{ID= 102,Name = "Samir", TotalMarks = 278,
+           //        Subjects = new List<Subject>()
+           //        {
+           //            new Subject(){SubjectName = "Math", Marks = 90},
+           //            new Subject(){SubjectName = "Science", Marks = 95},
+           //            new Subject(){SubjectName = "English", Marks = 93}
+           //        }},
+           //    new PrimaryStudent{ID= 103,Name = "Yara", TotalMarks = 240,
+           //        Subjects = new List<Subject>()
+           //        {
+           //            new Subject(){SubjectName = "Math", Marks = 70},
+           //            new Subject(){SubjectName = "Science", Marks = 80},
+           //            new Subject(){SubjectName = "English", Marks = 90}
+           //        }},
+           //    new PrimaryStudent{ID= 104,Name = "Hana", TotalMarks = 275,
+           //        Subjects = new List<Subject>()
+           //        {
+           //            new Subject(){SubjectName = "Math", Marks = 90},
+           //            new Subject(){SubjectName = "Science", Marks = 90},
+           //            new Subject(){SubjectName = "English", Marks = 95}
+           //        }},
+           //    new PrimaryStudent{ID= 105,Name = "Tamer", TotalMarks = 255,
+           //        Subjects = new List<Subject>()
+           //        {
+           //            new Subject(){SubjectName = "Math", Marks = 80},
+           //            new Subject(){SubjectName = "Science", Marks = 90},
+           //            new Subject(){SubjectName = "Physics", Marks = 85}
+           //        }
+           //    }
+           //};
+           #region notYet
+           //var result1 = listStudents.GroupBy(x => x.ID).Select(x => new { Id = x.Key, AverageMark = x.SelectMany(x => x.Subjects).Average(x => x.Marks) });
+           //foreach (var item in result1)
+           //{
+           //    Console.WriteLine($"ID = {item.Id} , AverageMark = {item.AverageMark}");
+           //}
+           #endregion
+
+           //var result1 = listStudents.All(x => x.Subjects.Select(x => x.SubjectName).Contains("Physics"));
+           //var result2 = listStudents.Any(x => x.Subjects.Select(x => x.SubjectName).Contains("Physics"));
+           //Console.WriteLine(result1);
+           #endregion
+
+           //------------------Grouping---------------//
+           #region GroupBy
+           //var stdList = new List<SecondryStudent>()
+           //{
+           //    new SecondryStudent { ID = 1001, Name = "Ali", Gender = "Male", Barnch = "BSE", Age = 20 },
+           //    new SecondryStudent { ID = 1002, Name = "Kamal", Gender = "Male", Barnch = "ETC", Age = 21  },
+           //    new SecondryStudent { ID = 1003, Name = "Ramy", Gender = "Male", Barnch = "CSE", Age = 21  },
+           //    new SecondryStudent { ID = 1004, Name = "Samir", Gender = "Male", Barnch = "CSE", Age = 20  },
+           //    new SecondryStudent { ID = 1005, Name = "Hoda", Gender = "Female", Barnch = "ETC", Age = 20 },
+           //    new SecondryStudent { ID = 1006, Name = "laila", Gender = "Female", Barnch = "BSE", Age = 21 },
+           //    new SecondryStudent { ID = 1007, Name = "Tamer", Gender = "Male", Barnch = "CSE", Age = 22  },
+           //    new SecondryStudent { ID = 1008, Name = "Shady", Gender = "Male", Barnch = "CSE", Age = 20  },
+           //    new SecondryStudent { ID = 1009, Name = "Mai", Gender = "Female", Barnch = "ETC", Age = 22 },
+           //    new SecondryStudent { ID = 1010, Name = "Rana", Gender = "Female",Barnch = "BSE", Age = 21 }
+           //};
+           //var result1 = stdList.GroupBy(x => x.Barnch).Select(x => new SecondryStudentDto { BranchName = x.Key, StudentNames = x.Select(x => x.Name).ToList() });
+           //var result2 = stdList.GroupBy(x => x.Gender).OrderByDescending(x => x.Key).Select(x => new SecondryStudentDto { BranchName = x.Key, StudentNames = x.Select(x => x.Name).OrderBy(x => x).ToList() });
+           //var result3 = stdList
+           //    .GroupBy(x => x.Barnch).Select(group => new { Bransh = group.Key, HighAgeStudent = group.Max(x => x.Age), Names = group.Where(x => x.Age == group.Max(subG => subG.Age)).Select(r => r.Name) });
+           ////foreach(var item in result2)
+           ////{
+           ////    Console.WriteLine(item.BranchName);
+           ////    foreach(var name in item.StudentNames)
+           ////    {
+           ////        Console.WriteLine($"- {name}");
+           ////    }
+           ////}
+           //List<Order> orders = new List<Order>
+           //{
+           //    new Order { CustomerId = 1, Amount = 250 },
+           //    new Order { CustomerId = 2, Amount = 150 },
+           //    new Order { CustomerId = 1, Amount = 100 },
+           //    new Order { CustomerId = 3, Amount = 200 },
+           //    new Order { CustomerId = 2, Amount = 300 }
+           //};
+           //var result4 = orders.GroupBy(x => x.CustomerId).Select(x => new { Customer = x.Key, TotalAmmount = x.Select(x => x.Amount).Sum() });
+           ////foreach (var item in result4)
+           ////{
+           ////    Console.WriteLine($"Customer - {item.Customer} , Total = {item.TotalAmmount}");
+           ////}
+           //List<TestEmployee> employees = new List<TestEmployee>
+           //{
+           //    new TestEmployee { Name = "Ramy", Department = "IT", Role = "Developer" },
+           //    new TestEmployee { Name = "Samy", Department = "IT", Role = "Tester" },
+           //    new TestEmployee { Name = "laila", Department = "HR", Role = "Recruiter" },
+           //    new TestEmployee { Name = "Jana", Department = "IT", Role = "Developer" },
+           //    new TestEmployee { Name = "Sara", Department = "HR", Role = "Manager" },
+           //    new TestEmployee { Name = "Hoda", Department = "IT", Role = "Developer" }
+           //};
+           ////var result5 = employees.GroupBy(x => x.Department).Select(x => new { Dept = x.Key, RolePositions = x.GroupBy(x => x.Role).Select(x => new { Role = x.Key, Names = x.Select(x => x.Name) }) });
+           ////foreach (var item in result5)
+           ////{
+           ////    Console.WriteLine(item.Dept);
+           ////    foreach (var Role in item.RolePositions)
+           ////    {
+           ////        Console.WriteLine($"-- {Role.Role}");
+           ////        foreach (var name in Role.Names)
+           ////        {
+           ////            Console.WriteLine($"---- {name}");
+           ////        }
+           ////    }
+           ////}
+           //List<Sale> sales = new List<Sale>
+           //{
+           //    new Sale { ProductId = 1, Quantity = 10, SaleDate = new DateTime(2023, 1, 15) },
+           //    new Sale { ProductId = 1, Quantity = 5, SaleDate = new DateTime(2023, 1, 20) },
+           //    new Sale { ProductId = 2, Quantity = 7, SaleDate = new DateTime(2023, 1, 25) },
+           //    new Sale { ProductId = 1, Quantity = 13, SaleDate = new DateTime(2023, 2, 5) },
+           //    new Sale { ProductId = 2, Quantity = 8, SaleDate = new DateTime(2023, 2, 10) },
+           //    new Sale { ProductId = 1, Quantity = 5, SaleDate = new DateTime(2023, 1, 18) },
+           //    new Sale { ProductId = 2, Quantity = 4, SaleDate = new DateTime(2023, 2, 12) },
+           //    new Sale { ProductId = 3, Quantity = 8, SaleDate = new DateTime(2023, 2, 22) }
+           //};
+           ////GroupingBy multi keys => [using anonymous object , using tuple]
+           //var result6 = sales.GroupBy(x => new { ProdId = x.ProductId, SoldMonth = x.SaleDate.ToString("MM/yyyy") }).Select(x=>new { PId = x.Key.ProdId , PMonth = x.Key.SoldMonth , pTotalPerMonth = x.Sum(x=>x.Quantity)});
+           //var result7 = sales.GroupBy(x => (x.ProductId, x.SaleDate.ToString("MM/yyyy"))).Select(x => new { PId = x.Key.ProductId, PMonth = x.Key.Item2, pTotalPerMonth = x.Sum(x => x.Quantity) });
+           //foreach (var item in result7)
+           //{
+           //    Console.WriteLine($"PId = {item.PId} , PQuantity = {item.pTotalPerMonth} , PSaleDate = {item.PMonth}");
+           //}
+           ////Ordering with Grouping
+           //var listOfSTD = new List<StudentTest>()
+           //{
+           //    new StudentTest { ID = 1001, Name = "Samy", Gender = "Female", Branch = "CSE", Age = 20 },
+           //    new StudentTest { ID = 1002, Name = "Ramy", Gender = "Male", Branch = "ETC", Age = 21  },
+           //    new StudentTest { ID = 1003, Name = "Hoda", Gender = "Male", Branch = "CSE", Age = 21  },
+           //    new StudentTest { ID = 1004, Name = "Mai", Gender = "Male", Branch = "CSE", Age = 20  },
+           //    new StudentTest { ID = 1005, Name = "Hana", Gender = "Female", Branch = "ETC", Age = 20 },
+           //    new StudentTest { ID = 1006, Name = "Sara", Gender = "Female", Branch = "CSE", Age = 21 },
+           //    new StudentTest { ID = 1007, Name = "Wael", Gender = "Male", Branch = "CSE", Age = 22  },
+           //    new StudentTest { ID = 1008, Name = "Amir", Gender = "Female", Branch = "CSE", Age = 20  },
+           //    new StudentTest { ID = 1009, Name = "Osama", Gender = "Female", Branch = "ETC", Age = 22 },
+           //    new StudentTest { ID = 1010, Name = "Haitham", Gender = "Male",Branch = "ETC", Age = 21 }
+           //};
+           //var result8 = listOfSTD.GroupBy(x => (x.Branch, x.Gender)).OrderByDescending(x => x.Key.Branch).ThenBy(x => x.Key.Gender);
+
+           #endregion
+
+           #region ToLookUp
+           //var listOfSTD = new List<StudentTest>()
+           //{
+           //    new StudentTest { ID = 1001, Name = "Samy", Gender = "Male", Branch = "CSE", Age = 20 },
+           //    new StudentTest { ID = 1002, Name = "Ramy", Gender = "Male", Branch = "ETC", Age = 21  },
+           //    new StudentTest { ID = 1003, Name = "Hoda", Gender = "Female", Branch = "CSE", Age = 21  },
+           //    new StudentTest { ID = 1004, Name = "Mai", Gender = "Female", Branch = "CSE", Age = 20  },
+           //    new StudentTest { ID = 1005, Name = "Hana", Gender = "Female", Branch = "ETC", Age = 20 },
+           //    new StudentTest { ID = 1006, Name = "Sara", Gender = "Female", Branch = "CSE", Age = 21 },
+           //    new StudentTest { ID = 1007, Name = "Wael", Gender = "Male", Branch = "CSE", Age = 22  },
+           //    new StudentTest { ID = 1008, Name = "Amir", Gender = "Male", Branch = "CSE", Age = 20  },
+           //    new StudentTest { ID = 1009, Name = "Osama", Gender = "Male", Branch = "ETC", Age = 22 },
+           //    new StudentTest { ID = 1010, Name = "Haitham", Gender = "Male",Branch = "ETC", Age = 21 }
+           //};
+           //var result1 = listOfSTD.ToLookup(x => (x.Branch, x.Gender)).Select(x => new { Branch = x.Key.Branch, Gender = x.Key.Gender , Names = x.Select(x=>x.Name)});
+           //foreach (var item in result1)
+           //{
+           //    Console.WriteLine($"{item.Branch} - {item.Gender}");
+           //    foreach (var name in item.Names)
+           //    {
+           //        Console.WriteLine(name);
+           //    }
+           //}
+           #endregion
+
+           //------------------Joining---------------//
+           #region InnerJoin , GroupJoin
+           ////[Note => (InnerJoin) Bad in large dataset how to optimize it]
+           //var listOfEmployee = new List<EmployeeTest>()
+           //{
+           //    new EmployeeTest { ID = 1, Name = "Preety", AddressId = 1, DepartmentId = 10 },
+           //    new EmployeeTest { ID = 2, Name = "Priyanka", AddressId = 2, DepartmentId = 20 },
+           //    new EmployeeTest { ID = 3, Name = "Anurag", AddressId = 3, DepartmentId = 30 },
+           //    new EmployeeTest { ID = 4, Name = "Pranaya", AddressId = 4, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 5, Name = "Hina", AddressId = 5, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 6, Name = "Sambit", AddressId = 6, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 7, Name = "Happy", AddressId = 7, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 8, Name = "Tarun", AddressId = 8, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 9, Name = "Santosh", AddressId = 9, DepartmentId = 10 },
+           //    new EmployeeTest { ID = 10, Name = "Raja", AddressId = 10, DepartmentId = 20 },
+           //    new EmployeeTest { ID = 11, Name = "Ramesh", AddressId = 11, DepartmentId = 30 }
+           //};
+
+           //var listOfAddress = new List<Address>()
+           //{
+           //    new Address { ID = 1, AddressLine = "AddressLine1"},
+           //    new Address { ID = 2, AddressLine = "AddressLine2"},
+           //    new Address { ID = 3, AddressLine = "AddressLine3"},
+           //    new Address { ID = 4, AddressLine = "AddressLine4"},
+           //    new Address { ID = 5, AddressLine = "AddressLine5"},
+           //    new Address { ID = 9, AddressLine = "AddressLine9"},
+           //    new Address { ID = 10, AddressLine = "AddressLine10"},
+           //    new Address { ID = 11, AddressLine = "AddressLine11"},
+           //};
+
+           //var listOfDept = new List<Department>()
+           //{
+           //    new Department { ID = 10, Name = "IT"       },
+           //    new Department { ID = 20, Name = "HR"       },
+           //    new Department { ID = 30, Name = "Payroll"  },
+           //};
+           //var result1 = listOfEmployee.Join(listOfAddress, employee => employee.AddressId, address => address.ID, (employee, address) => new
+           //{
+           //    EmpId = employee.ID,
+           //    EmpName = employee.Name,
+           //    EmpAddress = address.AddressLine,
+           //    DeptId = employee.DepartmentId
+           //}).Join(listOfDept, employee => employee.DeptId, dept => dept.ID, (employee, dept) => new
+           //{
+           //    EmployeeId = employee.EmpId,
+           //    EmployeeName = employee.EmpName,
+           //    EmployeeAddress = employee.EmpAddress,
+           //    EmployeeDepartment = dept.Name
+
+           //});
+           ////foreach (var item in result1)
+           ////{
+           ////    Console.WriteLine($"{item.EmployeeId} - {item.EmployeeName} - {item.EmployeeAddress} - {item.EmployeeDepartment}");
+           ////}
+           ////GroupJoin samilar to join but it build data in hierarchical result
+           //var result2 = listOfDept.GroupJoin(listOfEmployee, dept => dept.ID, employee => employee.DepartmentId, (dept, employee) => new
+           //{
+           //    DeptName = dept.Name,
+           //    GroupEmployee = employee
+           //});
+           ////foreach (var item in result2)
+           ////{
+           ////    Console.WriteLine($"{item.DeptName}");
+           ////    foreach (var emp in item.GroupEmployee)
+           ////    {
+           ////        Console.WriteLine($"{emp.ID} - {emp.Name}");
+           ////    }
+           ////}
+           #endregion
+
+           #region LeftJoin
+           //var listOfEmployee = new List<EmployeeTest>()
+           //{
+           //    new EmployeeTest { ID = 1, Name = "Preety", AddressId = 1, DepartmentId = 10 },
+           //    new EmployeeTest { ID = 2, Name = "Priyanka", AddressId = 2, DepartmentId = 20 },
+           //    new EmployeeTest { ID = 3, Name = "Anurag", AddressId = 3, DepartmentId = 30 },
+           //    new EmployeeTest { ID = 4, Name = "Pranaya", AddressId = 4, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 5, Name = "Hina", AddressId = 5, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 6, Name = "Sambit", AddressId = 6, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 7, Name = "Happy", AddressId = 7, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 8, Name = "Tarun", AddressId = 8, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 9, Name = "Santosh", AddressId = 9, DepartmentId = 10 },
+           //    new EmployeeTest { ID = 10, Name = "Raja", AddressId = 10, DepartmentId = 20 },
+           //    new EmployeeTest { ID = 11, Name = "Ramesh", AddressId = 11, DepartmentId = 30 }
+           //};
+           //var listOfDept = new List<Department>()
+           //{
+           //    new Department { ID = 10, Name = "IT"     },
+           //    new Department { ID = 20, Name = "HR"     },
+           //    new Department { ID = 30, Name = "Payroll"},
+           //    new Department { ID = 40, Name = "Marking"}
+           //};
+           //var result1 = listOfEmployee.GroupJoin(listOfDept, employee => employee.DepartmentId, dept => dept.ID, (employee, dept) => new
+           //{
+           //    employee,
+           //    dept
+           //}).SelectMany(x => x.dept.DefaultIfEmpty()/*this line to make empty department apear with null*/, (employee, dept) => new
+           //{
+           //    EMPName = employee.employee.Name,
+           //    DepartmentName = dept?.Name ?? "-"
+           //});
+           ////foreach (var item in result1)
+           ////{
+           ////    Console.WriteLine($"{item.EMPName} => {item.DepartmentName}");
+           ////}
+           //var result2 = listOfDept.GroupJoin(listOfEmployee, dept => dept.ID, emp => emp.DepartmentId, (department, employees) => new
+           //{
+           //    department,
+           //    employees
+           //}).SelectMany(x => x.employees.DefaultIfEmpty(), (dept, employee) => new
+           //{
+           //    DeptName = dept.department.Name,
+           //    EmployeeName = employee?.Name ?? "-"
+           //});
+           ////foreach (var item in result2)
+           ////{
+           ////    Console.WriteLine($"{item.DeptName} => {item.EmployeeName}");
+           ////}
+           #endregion
+
+           #region FullOuterJoin
+           //var listOfEmployee = new List<EmployeeTest>()
+           //{
+           //    new EmployeeTest { ID = 1, Name = "Amir", AddressId = 1, DepartmentId = 10 },
+           //    new EmployeeTest { ID = 2, Name = "Samy", AddressId = 2, DepartmentId = 20 },
+           //    new EmployeeTest { ID = 3, Name = "Ramy", AddressId = 3, DepartmentId = 30 },
+           //    new EmployeeTest { ID = 4, Name = "Hady", AddressId = 4, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 5, Name = "Hana", AddressId = 5, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 6, Name = "Tamer", AddressId = 6, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 7, Name = "Omar", AddressId = 7, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 8, Name = "Maged", AddressId = 8, DepartmentId = 0 },
+           //    new EmployeeTest { ID = 9, Name = "Sara", AddressId = 9, DepartmentId = 10 },
+           //    new EmployeeTest { ID = 10, Name = "Hoda", AddressId = 10, DepartmentId = 20 },
+           //    new EmployeeTest { ID = 11, Name = "Aya", AddressId = 11, DepartmentId = 30 }
+           //};
+           //var listOfDept = new List<Department>()
+           //{
+           //    new Department { ID = 10, Name = "IT"     },
+           //    new Department { ID = 20, Name = "HR"     },
+           //    new Department { ID = 30, Name = "Payroll"},
+           //    new Department { ID = 40, Name = "Marking"},
+           //    new Department { ID = 50, Name = "Analysis"}
+           //};
+           //var leftJoinResult = listOfEmployee.GroupJoin(listOfDept, x => x.DepartmentId, x => x.ID, (emp, deptList) => new
+           //{
+           //    emp,
+           //    deptList
+           //}).SelectMany(x => x.deptList.DefaultIfEmpty(), (emp, deptList) => new
+           //{
+           //    EmployeeId = emp.emp.ID.ToString(),
+           //    EmployeeName = emp.emp.Name,
+           //    EmployeeDepartment = deptList?.Name ?? ""
+           //});
+           //var rightJoinResult = listOfDept.GroupJoin(listOfEmployee, dept => dept.ID, emp => emp.DepartmentId, (dept, employees) => new
+           //{
+           //    dept,
+           //    employees
+           //}).SelectMany(x => x.employees.DefaultIfEmpty(), (dept, employees) => new
+           //{
+           //    EmployeeId = employees?.ID.ToString() ?? "",
+           //    EmployeeName = employees?.Name ?? "",
+           //    EmployeeDepartment = dept.dept.Name
+           //});
+           //var fullOuterJoinResult = leftJoinResult.Union(rightJoinResult);
+           //foreach (var item in fullOuterJoinResult)
+           //{
+           //    Console.WriteLine($"{item.EmployeeId} - {item.EmployeeName} - {item.EmployeeDepartment}");
+           //}
+
+           #endregion
+
+           #region CRJoin
+           ////[Note => return all posible combination]
+           ////using select many
+           //var listOfEmployee = new List<EmployeeTest>()
+           //{
+           //    new EmployeeTest { ID = 1, Name = "Amir", AddressId = 1 },
+           //    new EmployeeTest { ID = 2, Name = "Samy", AddressId = 2 },
+           //    new EmployeeTest { ID = 3, Name = "Ramy", AddressId = 3 },
+           //    new EmployeeTest { ID = 4, Name = "Hady", AddressId = 4 },
+           //    new EmployeeTest { ID = 5, Name = "Hana", AddressId = 5 },
+           //    new EmployeeTest { ID = 6, Name = "Tamer", AddressId = 6 },
+           //    new EmployeeTest { ID = 7, Name = "Omar", AddressId = 7 },
+           //    new EmployeeTest { ID = 8, Name = "Maged", AddressId = 8 },
+           //    new EmployeeTest { ID = 9, Name = "Sara", AddressId = 9 },
+           //    new EmployeeTest { ID = 10, Name = "Hoda", AddressId = 10 },
+           //    new EmployeeTest { ID = 11, Name = "Aya", AddressId = 11 }
+           //};
+           //var listOfDept = new List<Department>()
+           //{
+           //    new Department { ID = 10, Name = "IT"     },
+           //    new Department { ID = 20, Name = "HR"     },
+           //    new Department { ID = 30, Name = "Payroll"},
+           //    new Department { ID = 40, Name = "Marking"},
+           //    new Department { ID = 50, Name = "Analysis"}
+           //};
+           //var result1 = listOfEmployee.SelectMany(x => listOfDept, (employee, dept) => new
+           //{
+           //    EmployeeName = employee.Name,
+           //    EmployeeDept = dept.Name
+           //});
+           //var result2 = listOfEmployee.Join(listOfDept, employee => true, dept => true, (employee, dept) => new
+           //{
+           //    EmployeeName = employee.Name,
+           //    EmployeeDept = dept.Name
+           //});
+           //foreach (var item in result2)
+           //{
+           //    Console.WriteLine($"{item.EmployeeName} - {item.EmployeeDept}");
+           //}
+           #endregion
+           //------------------ElementOperation---------------//
+           #region ElementAt , ElementAtOrDefault , First , FirstOrDefault , Last , LastOrDefault , Single , SingleOrDefault
+           //var listOfEmployee = new List<EmployeeTest>()
+           //{
+           //    new EmployeeTest { ID = 1, Name = "Amir", AddressId = 1 },
+           //    new EmployeeTest { ID = 2, Name = "Samy", AddressId = 2 },
+           //    new EmployeeTest { ID = 3, Name = "Ramy", AddressId = 3 },
+           //    new EmployeeTest { ID = 4, Name = "Hady", AddressId = 4 },
+           //    new EmployeeTest { ID = 5, Name = "Hana", AddressId = 5 },
+           //    new EmployeeTest { ID = 6, Name = "Tamer", AddressId = 6 },
+           //    new EmployeeTest { ID = 7, Name = "Omar", AddressId = 7 },
+           //    new EmployeeTest { ID = 8, Name = "Maged", AddressId = 8 },
+           //    new EmployeeTest { ID = 9, Name = "Sara", AddressId = 9 },
+           //    new EmployeeTest { ID = 10, Name = "Hoda", AddressId = 10 },
+           //    new EmployeeTest { ID = 11, Name = "Aya", AddressId = 11 }
+           //};
+           //var result1 = listOfEmployee.ElementAt(6);
+           //var result2 = listOfEmployee.ElementAtOrDefault(13);
+           ////Can take predicate
+           //var result3 = listOfEmployee.First();
+           //var result4 = listOfEmployee.FirstOrDefault();
+           //var result5 = listOfEmployee.Last();
+           //var result6 = listOfEmployee.LastOrDefault();
+           //// fail if sequence has more element , empty , predicate mathch many element
+           //var result7 = listOfEmployee.Single();
+           //var result8 = listOfEmployee.SingleOrDefault();
+           //var result9 = new List<int>().DefaultIfEmpty(999999);
+
+           //Console.WriteLine(result9.First());
+           #endregion
+
+           #region SequenceEqual
+           //var lst1 = new List<int> { 1, 2, 3 };
+           //var lst2 = new List<int> { 2,1, 3 };
+           //var lst3 = new List<string> { "ahmed", "ramy" };
+           //var lst4 = new List<string> { "Ramy", "ahmed" };
+           //var result1 = lst3.OrderBy(x=>x).SequenceEqual(lst4.OrderBy(x=>x), StringComparer.OrdinalIgnoreCase);
+           ////complex object
+
+           //Console.WriteLine(result1);
+           #endregion
+
+           //------------------PartioningOperation---------------//
+           #region Take , TakeWhile , Skip , SkipWhile
+           //List<int> numbers = new List<int>() { 10, 6, 4, 3, 5, 9, 7, 8, 2, 1 };
+           //var result1 = numbers.Take(4).ToList();
+           //var result2 = numbers.Take(new Range(2, 5));
+           //var result3 = numbers.TakeWhile(x => x > 5);
+           //var result4 = numbers.Skip(4);
+           //var result5 = numbers.SkipWhile(x => x > 4);
+           //foreach ( var item in result5)
+           //{
+           //    Console.WriteLine(item);
+           //}
+           #endregion
+
+           #region Pagination
+           //var employees = new List<EmployeeResult>()
+           //{
+           //    new EmployeeResult() {ID = 1, Name = "Pranaya", Department = "IT" },
+           //    new EmployeeResult() {ID = 2, Name = "Priyanka", Department = "IT" },
+           //    new EmployeeResult() {ID = 3, Name = "Preety", Department = "IT" },
+           //    new EmployeeResult() {ID = 4, Name = "Sambit", Department = "IT" },
+           //    new EmployeeResult() {ID = 5, Name = "Sudhanshu", Department = "HR" },
+           //    new EmployeeResult() {ID = 6, Name = "Santosh", Department = "HR" },
+           //    new EmployeeResult() {ID = 7, Name = "Happy", Department = "HR" },
+           //    new EmployeeResult() {ID = 8, Name = "Raja", Department = "IT" },
+           //    new EmployeeResult() {ID = 9, Name = "Tarun", Department = "IT" },
+           //    new EmployeeResult() {ID = 10, Name = "Bablu", Department = "IT" },
+           //    new EmployeeResult() {ID = 11, Name = "Hina", Department = "HR" },
+           //    new EmployeeResult() {ID = 12, Name = "Anurag", Department = "HR" },
+           //    new EmployeeResult() {ID = 13, Name = "Dillip", Department = "HR" },
+           //    new EmployeeResult() {ID = 14, Name = "Manoj", Department = "HR" },
+           //    new EmployeeResult() {ID = 15, Name = "Lima", Department = "IT" },
+           //    new EmployeeResult() {ID = 16, Name = "Sona", Department = "IT" },
+           //};
+           ////////Result = DataSource.Skip((PN – 1) * NRP).Take(NRP)
+           //int PN = 1;
+           //int NPP = 3;
+           //var pagedResult = employees.Skip((PN - 1) * NPP).Take(NPP);
+           //foreach (var item in pagedResult)
+           //{
+           //    Console.WriteLine(item.ToString());
+           //}
+           #endregion
+
+           //------------------GenerationOperator---------------//
+           #region Range , Repeat , Empty<> , Append , Prepend
+           //var result1 = Enumerable.Range(3, 4).Select(x => x * x);
+           //var result2 = Enumerable.Repeat("any data type", 4);
+           //var result3 = Enumerable.Repeat(new Employee(), 4);
+           //var result4 = null?? Enumerable.Empty<Employee>();
+           //foreach (var item in result4)
+           //{
+           //    Console.WriteLine(item);
+           //}
+           //int[] numbers = { 1, 2, 3, 4, 5 };
+           //// Prepend 0 to the sequence of numbers
+           //var result1 = numbers.Append(6).ToArray();
+           //var result2 = numbers.Prepend(0).ToArray();
+           //foreach (var number in result1)
+           //{
+           //    Console.WriteLine(number);
+           //}
+           #endregion
+
+           #region ToDictionary
+           //List<Product> listProducts = new List<Product>
+           //{
+           //    new Product { Id= 1001, Name = "Mobile", Price = 800 },
+           //    new Product { Id= 1002, Name = "Laptop", Price = 900 },
+           //    new Product { Id= 1003, Name = "Desktop", Price = 800 }
+           //};
+           //var result1 = listProducts.ToDictionary(x => x.Id); // in case duplicate key throw argument exception
+           //var result2 = listProducts.ToDictionary(x => x.Id , x=>x.Name);
+           //foreach (var product in result2)
+           //{
+           //    Console.WriteLine($"{product.Key} - {product.Value}");
+           //}
+           #endregion

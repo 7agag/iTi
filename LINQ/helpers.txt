@@ -1,0 +1,321 @@
+    public class Employee
+    {
+        public int ID { get; set; }
+        public string FirstName { get; set; } = null!;
+        public string LastName { get; set; } = null!;
+        public int Salary { get; set; }
+        public override string ToString()
+        {
+            return $"{ID} - {FirstName + " " + LastName} - {Salary}";
+        }
+    }
+    public class EMPComparer : IComparer<Employee>
+    {
+        public int Compare(Employee? x, Employee? y)
+        {
+            int comarerResult = x.Salary.CompareTo(y.Salary);
+            if (comarerResult == 0)
+            {
+                return x.FirstName.CompareTo(y.FirstName);
+            }
+            return comarerResult;
+        }
+    }
+    public class EmployeeDto
+    {
+        public int ID { get; set; }
+        public string FullName { get; set; } = null!;
+        public override string ToString()
+        {
+            return $"{ID} - {FullName}";
+        }
+    }
+    public class Student
+    {
+        public int ID { get; set; }
+        public string Name { get; set; } = null!;
+        public string Email { get; set; } = null!;
+        public List<string> Programming { get; set; } = new();
+
+    }
+    public class Product : IEquatable<Product>
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public decimal Price { get; set; }
+
+        public bool Equals(Product? other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            else if (object.ReferenceEquals(this, null))
+            {
+                return false;
+            }
+            else if (this.Id == other.Id && this.Name == other.Name && this.Price == other.Price)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        //public override bool Equals(object? obj)
+        //{
+        //    if (object.ReferenceEquals(obj, null))
+        //    {
+        //        return false;
+        //    }
+        //    else if (object.ReferenceEquals(this, null))
+        //    {
+        //        return false;
+        //    }
+        //    else if (obj is Product prod && this.Id == prod.Id && this.Name == prod.Name && this.Price == prod.Price)
+        //    {
+        //        return true;
+        //    }
+        //    return false;
+        //}
+        public override int GetHashCode()
+        {
+            int idHashCode = this.Id.GetHashCode();
+            int nameHashCode = this.Name.GetHashCode();
+            int priceHashCode = this.Price.GetHashCode();
+            return idHashCode ^ nameHashCode ^ priceHashCode;
+        }
+    }
+    public interface IPerson
+    {
+        public Guid Identity { get; set; }
+        public string Name { get; set; }
+    }
+    public interface ISkills
+    {
+        public List<string> Skills { get; set; }
+    }
+    public interface IExperiance
+    {
+        public int ExperianceYears { get; set; }
+    }
+    public class Developer : IPerson, ISkills
+    {
+        public Guid Identity { get; set; }
+        public string Name { get; set; } = null!;
+        public List<string> Skills { get; set; } = new();
+    }
+    public class Engineer : IPerson, IExperiance
+    {
+        public Guid Identity { get; set; }
+        public string Name { get; set; } = null!;
+        public int ExperianceYears { get; set; }
+    }
+    public class Fruit
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public int Price { get; set; }
+    }
+    public class FruitComparer : IEqualityComparer<Fruit>
+    {
+        public bool Equals(Fruit? x, Fruit? y)
+        {
+            if (x is null && y is null)
+            {
+                return true;
+            }
+            else if ((x is not null && y is null) || (x is null && y is not null))
+            {
+                return false;
+            }
+            else if (x.Price == y.Price)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public int GetHashCode([DisallowNull] Fruit obj)
+        {
+            if (obj == null)
+                throw new ArgumentNullException(nameof(obj));
+
+            return obj.Price.GetHashCode();
+        }
+    }
+    public class Person
+    {
+        public int Id { get; set; }
+        public string Name { get; set; } = null!;
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is Person))
+            {
+                return false;
+            }
+            else if (obj is Person person)
+            {
+                return this.Id == person.Id;
+            }
+            return false;
+        }
+        public override int GetHashCode()
+        {
+            return this.Id.GetHashCode();
+        }
+    }
+    public class CollageStudent : IEquatable<CollageStudent>
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public DateTime GraduationYear { get; set; }
+        public static List<CollageStudent> GetStudents()
+        {
+            List<CollageStudent> students = new List<CollageStudent>()
+            {
+                new CollageStudent {ID = 101, Name = "yara" ,GraduationYear=new DateTime(2015, 12, 25)},
+                new CollageStudent {ID = 102, Name = "tamer" ,GraduationYear=new DateTime(2016, 12, 25)},
+                new CollageStudent {ID = 101, Name = "YARa",GraduationYear=new DateTime(2015, 12, 25)},
+                new CollageStudent {ID = 104, Name = "ramy",GraduationYear=new DateTime(2018, 12, 25)}
+            };
+            return students;
+        }
+        public bool Equals(CollageStudent other)
+        {
+            if (object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return (this.Name.ToLower() == other.Name.ToLower()) && this.ID == other.ID && this.GraduationYear == other.GraduationYear;
+        }
+        public override int GetHashCode()
+        {
+            //invalid to do this => all properties used in equal method should be used in hashcode 
+            int NameHashCode = this.Name == null ? 0 : this.Name.ToLower().GetHashCode();
+            return NameHashCode;
+        }
+    }
+    public class ProductComparer : IEqualityComparer<Product>
+    {
+        public bool Equals(Product? x, Product? y)
+        {
+            if (object.ReferenceEquals(x, null))
+            {
+                return false;
+            }
+            else if (object.ReferenceEquals(y, null))
+            {
+                return false;
+            }
+            else if (x.Id == y.Id && x.Name == y.Name && x.Price == y.Price)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public int GetHashCode([DisallowNull] Product obj)
+        {
+            int idHashCode = obj.Id.GetHashCode();
+            int nameHashCode = obj.Name.GetHashCode();
+            int priceHashCode = obj.Price.GetHashCode();
+            return idHashCode ^ nameHashCode ^ priceHashCode;
+        }
+    }
+    public class FruitStatistics
+    {
+        public int MaxPrice { get; set; } = 0;
+        public int MinPrice { get; set; } = 0;
+        public int FruitCount { get; set; } = 0;
+        public int SumPrice { get; set; } = 0;
+        public override string ToString()
+        {
+            return $"MaxPrice = {MaxPrice} , MinPrice = {MinPrice} , SumPrice = {SumPrice} , FruitCount = {FruitCount}";
+        }
+    }
+    public class PrimaryStudent
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int TotalMarks { get; set; }
+        public List<Subject> Subjects { get; set; }
+    }
+    public class Subject
+    {
+        public string SubjectName { get; set; }
+        public int Marks { get; set; }
+    }
+    public class SecondryStudent
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Gender { get; set; }
+        public string Barnch { get; set; }
+        public int Age { get; set; }
+    }
+    public class SecondryStudentDto
+    {
+        public string BranchName { get; set; }
+        public List<string> StudentNames { get; set; }
+
+    }
+    public class Order
+    {
+        public int CustomerId { get; set; }
+        public decimal Amount { get; set; }
+    }
+    class TestEmployee
+    {
+        public string Name { get; set; }
+        public string Department { get; set; }
+        public string Role { get; set; }
+    }
+    public class Sale
+    {
+        public int ProductId { get; set; }
+        public int Quantity { get; set; }
+        public DateTime SaleDate { get; set; }
+    }
+    public class StudentTest
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Gender { get; set; }
+        public string Branch { get; set; }
+        public int Age { get; set; }
+    }
+    public class EmployeeTest
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public int AddressId { get; set; }
+        public int DepartmentId { get; set; }
+        public override string ToString()
+        {
+            return $"{ID} - {Name}";
+        }
+    }
+    public class Address
+    {
+        public int ID { get; set; }
+        public string AddressLine { get; set; }
+    }
+    public class Department
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+    public class EmployeeResult
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Department { get; set; }
+        public override string ToString()
+        {
+            return $"{ID} - {Name} - {Department}";
+        }
+    }
